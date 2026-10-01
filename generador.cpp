@@ -1,134 +1,116 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <random>
+#include <bits/stdc++.h>
+#include "Instancia.h"
+#include "generador.h"
 using namespace std;
 
-class Alternativa {
-public:
-    double U;
-    double costoM2;
-};
+void generarDimensiones(Instancia &instancia, mt19937 &gen){
+    uniform_real_distribution<double> largoDist(8.0, 15.0);
+    uniform_real_distribution<double> anchoDist(6.0, 12.0);
+    uniform_real_distribution<double> alturaDist(2.3, 2.8);
 
-class Elemento {
-public:
-    string nombre;
-    double area;
-    bool fijo;
-    vector<Alternativa> alternativas;
-    //si es fijo
-    double Ufijo;
-    double costoFijoM2;
-};
-
-class Instancia {
-public:
-    string tipo;
-    int semilla;
-    double largo;
-    double ancho;
-    double altura;
-    double superficie;
-    double volumen;
-    double Umax;
-    vector<Elemento> elementos;
-};
-
-
-
-Instancia generarInstancia(string tipo, int semilla) {
-    mt19937 gen(semilla);
-
-    uniform_real_distribution<double> distLargo(8.0, 15.0);
-    uniform_real_distribution<double> distAncho(6.0, 12.0);
-    uniform_real_distribution<double> distAltura(2.4, 2.8);
-
-    double largo = distLargo(gen);
-    double ancho = distAncho(gen);
-    double altura = distAltura(gen);
-
-    double superficie = largo * ancho;
-    double volumen = superficie * altura;
-
-    uniform_real_distribution<double> distUmax(0.4, 1.0);
-    double Umax = distUmax(gen);
-
-    Instancia instancia(
-        tipo,
-        superficie,
-        altura,
-        Umax,
-        semilla
-    );
-
-    double areaPiso = superficie;
-    double areaTecho = superficie;
-    double perimetro = 2.0 * (largo + ancho);
-    double areaMurosBruta = perimetro * altura;
-    uniform_real_distribution<double> distPorcentajeVentanas(0.10, 0.25);
-    double porcentajeVentanas = distPorcentajeVentanas(gen);
-    double areaVentanas = areaMurosBruta * porcentajeVentanas;
-    double areaMuros = areaMurosBruta - areaVentanas;
-
-    Elemento muro(
-        "Muro",
-        areaMuros,
-        false
-    );
-    Elemento techo(
-        "Techo",
-        areaTecho,
-        false
-    );
-    Elemento piso(
-        "Piso",
-        areaPiso,
-        false
-    );
-    Elemento ventana(
-        "Ventana",
-        areaVentanas,
-        false
-    );
-    instancia.elementos.push_back(muro);
-    instancia.elementos.push_back(techo);
-    instancia.elementos.push_back(piso);
-    instancia.elementos.push_back(ventana);
-    return instancia;
+    instancia.largo = largoDist(gen);
+    instancia.ancho = anchoDist(gen);
+    instancia.altura = alturaDist(gen);
+    instancia.superficie =instancia.largo * instancia.ancho;
+    instancia.volumen = instancia.superficie * instancia.altura;
 }
 
-int main() {
+double generarUmax(mt19937& gen) {
+    uniform_real_distribution<double> dist(0.5, 1.2);
+    return dist(gen);
+}
 
-    Instancia casa =
-        generarInstancia("pequena", 42);
+vector<string> elegirCategorias(const string& tipo,mt19937& gen) {
+    vector<string> categorias = {"Muro","Techo","Piso","Ventana","Puerta"};
+    if (tipo == "pequena") {
+        shuffle(categorias.begin(), categorias.end(), gen);
+        uniform_int_distribution<int> distCantidad(3, 4);
+        int cantidad = distCantidad(gen);
+        categorias.resize(cantidad);
+    }
+    return categorias;
+}
 
-    cout << "Tipo: "
-         << casa.tipo << endl;
-
-    cout << "Superficie: "
-         << casa.superficie << endl;
-
-    cout << "Altura: "
-         << casa.altura << endl;
-
-    cout << "Volumen: "
-         << casa.volumen << endl;
-
-    cout << "Umax: "
-         << casa.Umax << endl;
-
-    cout << "Semilla: "
-         << casa.semilla << endl;
-
-    cout << endl;
-
-    for (const Elemento& e : casa.elementos) {
-
-        cout << e.nombre << endl;
-
-        cout << "Area: "
-             << e.area << endl;
-        cout << endl;
+int generarCantidadAlternativas(const string& tipo,mt19937& gen) {
+    if (tipo == "pequena") {
+        uniform_int_distribution<int> dist(5, 10);
+        return dist(gen);
+    }
+    else if (tipo == "mediana") {
+        uniform_int_distribution<int> dist(11, 25);
+        return dist(gen);
+    }
+    else if (tipo == "grande") {
+        uniform_int_distribution<int> dist(26, 50);
+        return dist(gen);
     }
     return 0;
+}
+//LOS RANGOS PUEDEN SER CAMBIADOS
+double generarU(const string& categoria, mt19937& gen){
+    if (categoria == "Muro") {
+        uniform_real_distribution<double> dist(0.3, 1.5);
+        return dist(gen);
+    }
+    else if (categoria == "Techo") {
+        uniform_real_distribution<double> dist(0.2, 1.2);
+        return dist(gen);
+    }
+    else if (categoria == "Piso") {
+        uniform_real_distribution<double> dist(0.3, 1.4);
+        return dist(gen);
+    }
+    else if (categoria == "Ventana") {
+        uniform_real_distribution<double> dist(1.0, 5.5);
+        return dist(gen);
+    }
+    else if (categoria == "Puerta") {
+        uniform_real_distribution<double> dist(1.0, 3.5);
+        return dist(gen);
+    }
+    return 0.0;
+}
+// LOS PRECIOS PUEDEN SER CAMBIADOS
+double generarCosto(const string& categoria,double U,mt19937& gen){
+    double costoBase;
+    double factor;
+    if (categoria == "Muro") {
+        costoBase = 10000;
+        factor = 12000;
+    }
+    else if (categoria == "Techo") {
+        costoBase = 12000;
+        factor = 10000;
+    }
+    else if (categoria == "Piso") {
+        costoBase = 9000;
+        factor = 11000;
+    }
+    else if (categoria == "Ventana") {
+        costoBase = 50000;
+        factor = 70000;
+    }
+    else if (categoria == "Puerta") {
+        costoBase = 30000;
+        factor = 40000;
+    }
+    else {
+        return 0.0;
+    }
+    uniform_real_distribution<double> ruido(0.95, 1.05);
+    double costo = costoBase + factor / U;
+    return costo * ruido(gen);
+}
+
+void generarCatalogo(Elemento& elemento,const string& tipoInstancia,mt19937& gen) {
+
+    int cantidad = generarCantidadAlternativas(tipoInstancia,gen);
+
+    for (int i = 0; i < cantidad; i++) {
+        double U =generarU(elemento.categoria,gen);
+        double costo = generarCosto(elemento.categoria,U,gen);
+        Alternativa alternativa("A" + to_string(i + 1),U,costo);
+        elemento.alternativas.push_back(alternativa
+        );
+    }
 }
