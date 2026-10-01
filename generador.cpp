@@ -5,50 +5,36 @@
 using namespace std;
 
 class Alternativa {
-  public:
-    float U;
-    float costo;
-    Alternativa(float u, float c) {
-        U = u;
-        costo = c;
-    }
+public:
+    double U;
+    double costoM2;
 };
+
 class Elemento {
-  public:
+public:
     string nombre;
-    float area;
+    double area;
     bool fijo;
     vector<Alternativa> alternativas;
-    Elemento(string n, float a, bool f){
-      nombre = n;
-      area=a;
-      fijo=f;
-    }
+    //si es fijo
+    double Ufijo;
+    double costoFijoM2;
 };
 
 class Instancia {
 public:
     string tipo;
-    double superficie;
+    int semilla;
+    double largo;
+    double ancho;
     double altura;
+    double superficie;
     double volumen;
     double Umax;
-    int semilla;
     vector<Elemento> elementos;
-
-    Instancia(string t,
-              double s,
-              double h,
-              double uMax,
-              int seed) {
-        tipo = t;
-        superficie = s;
-        altura = h;
-        volumen = superficie * altura;
-        Umax = uMax;
-        semilla = seed;
-    }
 };
+
+
 
 Instancia generarInstancia(string tipo, int semilla) {
     mt19937 gen(semilla);
