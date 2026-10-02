@@ -1,0 +1,115 @@
+==============================
+DATOS DE LA INSTANCIA
+==============================
+Tipo: pequena
+Semilla: 105
+
+DIMENSIONES
+Largo: 10.2979 m
+Ancho: 11.1014 m
+Altura: 2.62477 m
+Superficie: 114.321 m2
+Volumen: 300.066 m3
+Umax: 0.981603
+Cantidad total de elementos: 7
+
+==============================
+CATALOGOS POR CATEGORIA
+==============================
+
+------------------------------
+Categoria: Muro
+Cantidad de alternativas: 10
+  A1 | U: 0.332382 | Costo/m2: $46103
+  A2 | U: 1.46326 | Costo/m2: $18200.8
+  A3 | U: 1.40449 | Costo/m2: $18544
+  A4 | U: 0.886343 | Costo/m2: $23538.8
+  A5 | U: 1.38937 | Costo/m2: $18637
+  A6 | U: 0.405894 | Costo/m2: $39564.4
+  A7 | U: 0.647757 | Costo/m2: $28525.5
+  A8 | U: 0.999371 | Costo/m2: $22007.6
+  A9 | U: 0.970353 | Costo/m2: $22366.6
+  A10 | U: 1.45474 | Costo/m2: $18248.9
+
+------------------------------
+Categoria: Puerta
+Cantidad de alternativas: 8
+  A1 | U: 1.4329 | Costo/m2: $57915.3
+  A2 | U: 1.41484 | Costo/m2: $58271.7
+  A3 | U: 1.27617 | Costo/m2: $61343.7
+  A4 | U: 1.81463 | Costo/m2: $52043
+  A5 | U: 3.24354 | Costo/m2: $42332.2
+  A6 | U: 2.37109 | Costo/m2: $46869.9
+  A7 | U: 1.60343 | Costo/m2: $54946.6
+  A8 | U: 1.82001 | Costo/m2: $51977.9
+
+==============================
+ELEMENTOS
+==============================
+
+------------------------------
+Nombre: Muro Norte
+Categoria: Muro
+Area: 28.7487 m2
+Tipo: FIJO
+U fijo: 1.00671
+Costo fijo/m2: $21920
+
+------------------------------
+Nombre: Muro Sur
+Categoria: Muro
+Area: 28.7487 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 10
+
+------------------------------
+Nombre: Muro Este
+Categoria: Muro
+Area: 26.6678 m2
+Tipo: FIJO
+U fijo: 1.2542
+Costo fijo/m2: $19567.8
+
+------------------------------
+Nombre: Muro Oeste
+Categoria: Muro
+Area: 26.6678 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 10
+
+------------------------------
+Nombre: Techo
+Categoria: Techo
+Area: 114.321 m2
+Tipo: FIJO
+U fijo: 0.681172
+Costo fijo/m2: $26680.6
+
+------------------------------
+Nombre: Piso
+Categoria: Piso
+Area: 114.321 m2
+Tipo: FIJO
+U fijo: 0.933805
+Costo fijo/m2: $20779.8
+
+------------------------------
+Nombre: Puerta 1
+Categoria: Puerta
+Area: 1.50337 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Puerta
+Cantidad de alternativas: 8
+
+==============================
+RESUMEN
+==============================
+Categorias: 4
+Catalogos generados: 2
+Elementos totales: 7
+Elementos fijos: 4
+Elementos optimizables: 3
+Umax: 0.981603
+Superficie: 114.321 m2
