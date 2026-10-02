@@ -25,8 +25,6 @@ vector<string> elegirCategorias(const string& tipo,mt19937& gen);
 
 void generarElementos(Instancia& instancia,mt19937& gen);
 
-double calcularAreaElemento(const string& categoria,const Instancia& instancia,mt19937& gen);
-
 void asignarFijosYOptimizables(Instancia& instancia,mt19937& gen);
 
 int generarCantidadAlternativas(const string& tipo,mt19937& gen);
