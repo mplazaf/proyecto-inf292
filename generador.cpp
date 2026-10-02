@@ -3,15 +3,6 @@
 #include "generador.h"
 using namespace std;
 
-vector<ConfigCategoria> configuracionBase = {
-    {"Muro", 4, 4},
-    {"Techo", 1, 1},
-    {"Piso", 1, 1},
-    {"Ventana", 1, 4},
-    {"Puerta", 1, 2}
-};
-
-
 void generarDimensiones(Instancia &instancia, mt19937 &gen){
     uniform_real_distribution<double> largoDist(8.0, 15.0);
     uniform_real_distribution<double> anchoDist(6.0, 12.0);
