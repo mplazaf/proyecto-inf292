@@ -162,16 +162,16 @@ double generarCosto(const string& categoria,double U,mt19937& gen){
     return costo ;
 }
 
-void generarCatalogo(Elemento& elemento,const string& tipoInstancia,mt19937& gen) {
-
+vector<Alternativa> generarCatalogo(const string& categoria,const string& tipoInstancia,mt19937& gen) {
+    vector<Alternativa> catalogo;
     int cantidad = generarCantidadAlternativas(tipoInstancia,gen);
-
     for (int i = 0; i < cantidad; i++) {
-        double U =generarU(elemento.categoria,gen);
-        double costo = generarCosto(elemento.categoria,U,gen);
+        double U = generarU(categoria,gen);
+        double costo = generarCosto(categoria,U, gen);
         Alternativa alternativa("A" + to_string(i + 1),U,costo);
-        elemento.alternativas.push_back(alternativa);
+        catalogo.push_back(alternativa);
     }
+    return catalogo;
 }
 
 void generarElementoFijo(Elemento& elemento,mt19937& gen) {
@@ -183,11 +183,11 @@ void generarElementoFijo(Elemento& elemento,mt19937& gen) {
     elemento.alternativas.clear();
 }
 
-void generarElementoOptimizable(Elemento& elemento,const string& tipoInstancia,mt19937& gen) {
+void generarElementoOptimizable(Elemento& elemento,const vector<Alternativa>& catalogo) {
     elemento.fijo = false;
     elemento.Ufijo = 0.0;
     elemento.costoFijoM2 = 0.0;
-    generarCatalogo(elemento,tipoInstancia,gen);
+    elemento.alternativas = catalogo;
 }
 
 int generarCantidadElementos(const ConfigCategoria& config,mt19937& gen) {
@@ -480,19 +480,30 @@ Instancia generarInstancia(const string& tipo,int semilla) {
         0.0,   // altura
         0.0    // Umax
     );
+    generarDimensiones(instancia,gen);
+    generarElementos(instancia,gen);
+    asignarAreas(instancia,gen);
+    asignarFijosYOptimizables(instancia,gen);
+    map<string, vector<Alternativa>> catalogos;
 
-    generarDimensiones(instancia, gen);
-    generarElementos(instancia, gen);
-    asignarAreas(instancia, gen);
-    asignarFijosYOptimizables(instancia, gen);
+    for (const Elemento& elemento : instancia.elementos) {
+        if (!elemento.fijo) {
+            if (catalogos.find(elemento.categoria) == catalogos.end()) {
+                catalogos[elemento.categoria] = generarCatalogo(elemento.categoria,instancia.tipo,gen);
+            }
+        }
+    }
 
     for (Elemento& elemento : instancia.elementos) {
         if (elemento.fijo) {
             generarElementoFijo(elemento,gen);
         } else {
-            generarElementoOptimizable(elemento,instancia.tipo,gen);
+            generarElementoOptimizable(
+                elemento,
+                catalogos[elemento.categoria]
+            );
         }
     }
-    instancia.Umax =generarUmax(instancia,gen);
+    instancia.Umax = generarUmax(instancia,gen);
     return instancia;
 }
