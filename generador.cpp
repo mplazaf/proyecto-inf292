@@ -61,13 +61,33 @@ double generarUmax(const Instancia& instancia,mt19937& gen) {
 }
 
 vector<string> elegirCategorias(const string& tipo,mt19937& gen) {
-    vector<string> categorias = {"Muro","Techo","Piso","Ventana","Puerta"};
+    vector<string> categorias;
     if (tipo == "pequena") {
-        shuffle(categorias.begin(), categorias.end(), gen);
-        uniform_int_distribution<int> distCantidad(3, 4);
-        int cantidad = distCantidad(gen);
-        categorias.resize(cantidad);
+        categorias.push_back("Muro");
+        vector<string> otrasCategorias = {
+            "Techo",
+            "Piso",
+            "Ventana",
+            "Puerta"
+        };
+        shuffle(otrasCategorias.begin(),otrasCategorias.end(),gen);
+        uniform_int_distribution<int> distCantidad(2, 3);
+        int cantidadExtra = distCantidad(gen);
+        for (int i = 0; i < cantidadExtra; i++) {
+            categorias.push_back(
+                otrasCategorias[i]
+            );
+        }
+        return categorias;
     }
+
+    categorias = {
+        "Muro",
+        "Techo",
+        "Piso",
+        "Ventana",
+        "Puerta"
+    };
     return categorias;
 }
 
@@ -180,14 +200,15 @@ void generarElementos(Instancia& instancia,mt19937& gen) {
 
     if (instancia.tipo == "grande") {
 
-        configuracion = {
-            {"Muro", 4, 4},
-            {"Techo", 1, 1},
-            {"Piso", 1, 1},
-            {"Ventana", 2, 4},
-            {"Puerta", 1, 2}
-        };
-    } else {
+      configuracion = {
+        {"Muro", 4, 4},
+        {"Techo", 1, 1},
+        {"Piso", 1, 1},
+        {"Ventana", 2, 6},
+        {"Puerta", 1, 3}
+      } ;
+    } 
+    else {
 
         configuracion = {
             {"Muro", 4, 4},
