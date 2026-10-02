@@ -137,9 +137,9 @@ double generarCosto(const string& categoria,double U,mt19937& gen){
     else {
         return 0.0;
     }
-    uniform_real_distribution<double> ruido(0.95, 1.05);
+    //uniform_real_distribution<double> ruido(0.95, 1.05);
     double costo = costoBase + factor / U;
-    return costo * ruido(gen);
+    return costo ;
 }
 
 void generarCatalogo(Elemento& elemento,const string& tipoInstancia,mt19937& gen) {
@@ -176,16 +176,29 @@ int generarCantidadElementos(const ConfigCategoria& config,mt19937& gen) {
 }
 
 void generarElementos(Instancia& instancia,mt19937& gen) {
-    vector<ConfigCategoria> configuracion = {
-        {"Muro", 4, 4},
-        {"Techo", 1, 1},
-        {"Piso", 1, 1},
-        {"Ventana", 1, 4},
-        {"Puerta", 1, 2}
-    };
+    vector<ConfigCategoria> configuracion;
 
+    if (instancia.tipo == "grande") {
+
+        configuracion = {
+            {"Muro", 4, 4},
+            {"Techo", 1, 1},
+            {"Piso", 1, 1},
+            {"Ventana", 2, 4},
+            {"Puerta", 1, 2}
+        };
+    } else {
+
+        configuracion = {
+            {"Muro", 4, 4},
+            {"Techo", 1, 1},
+            {"Piso", 1, 1},
+            {"Ventana", 1, 4},
+            {"Puerta", 1, 2}
+        };
+    }
+ 
     vector<string> categoriasSeleccionadas = elegirCategorias(instancia.tipo, gen);
-
     for (const ConfigCategoria& config : configuracion) {
         if (
             find(categoriasSeleccionadas.begin(),categoriasSeleccionadas.end(),config.categoria) == categoriasSeleccionadas.end()) {
@@ -316,11 +329,9 @@ void asignarAreas(Instancia& instancia,mt19937& gen) {
     }
     // Área promedio por ventana
     double areaPorVentana = 0.0;
-
     if (cantidadVentanas > 0) {
         areaPorVentana = areaVentanasTotal / cantidadVentanas;
     }
-
     // Puertas: rango de área por puerta
     uniform_real_distribution<double> distAreaPuerta(1.5,3.0);
 
