@@ -6,6 +6,13 @@
 #include "Instancia.h"
 using namespace std;
 
+struct ConfigCategoria {
+    string categoria;
+    int minimoElementos;
+    int maximoElementos;
+};
+
+
 Instancia generarInstancia(const string& tipo,int semilla);
 
 void generarDimensiones(Instancia& instancia,mt19937& gen);
@@ -28,6 +35,12 @@ double generarU(const string& categoria,mt19937& gen);
 
 double generarCosto(const string& categoria,double U,mt19937& gen);
 
-void generarSolucionFija(Elemento& elemento, mt19937& gen);
+void generarElementoFijo(Elemento& elemento, mt19937& gen);
+
+int generarCantidadElementos(const ConfigCategoria& config, mt19937& gen);
+
+void generarElementoOptimizable(Elemento& elemento, const string& tipoInstancia, mt19937& gen);
+
+void asignarAreas(Instancia& instancia,mt19937& gen);
 
 #endif
