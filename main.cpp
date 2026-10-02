@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "Instancia.h"
 #include "generador.h"
+#include "validacion.h"
 
 using namespace std;
 
@@ -14,7 +15,24 @@ int main() {
         semilla
     );
 
+    // ========================================================
+    // VALIDACION DE LA INSTANCIA
+    // ========================================================
+
     cout << "==============================" << endl;
+    cout << "VALIDACION" << endl;
+    cout << "==============================" << endl;
+
+    if (validarInstancia(casa)) {
+        cout << "Instancia valida" << endl;
+    }
+    else {
+        cout << "Instancia invalida" << endl;
+        return 1;
+    }
+
+
+    cout << "\n==============================" << endl;
     cout << "DATOS DE LA INSTANCIA" << endl;
     cout << "==============================" << endl;
 
