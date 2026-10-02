@@ -38,6 +38,10 @@ Como no hay nada que elegir, no tiene alternativas, pero genera un U y un precio
 retorna: void (modifica referencia)
 Toma un elemento y le genera un catálogo con la función generarCatalogo. Nada más.
 ###
+## Consideraciones lógicas
+### Área muros - ventanas - puertas
+Se reparte el área de aberturas en los muros entre los 4 muros, es decir no se toma en cuenta la geometría por motivos prácticos.
+areaAberturasPorMuro = (areaVentanasTotal + areaPuertasTotal)/ cantidadMuros;
 
 ## Cómo ejecutar
 1. Descargue todos los archivos y póngalos en la misma carpeta. Abra una terminal en esa carpeta.
