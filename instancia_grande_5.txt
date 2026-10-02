@@ -1,0 +1,304 @@
+==============================
+DATOS DE LA INSTANCIA
+==============================
+Tipo: grande
+Semilla: 115
+
+DIMENSIONES
+Largo: 10.041 m
+Ancho: 8.22874 m
+Altura: 2.57925 m
+Superficie: 82.6245 m2
+Volumen: 213.109 m3
+Umax: 0.446585
+Cantidad total de elementos: 11
+
+==============================
+CATALOGOS POR CATEGORIA
+==============================
+
+------------------------------
+Categoria: Muro
+Cantidad de alternativas: 39
+  A1 | U: 0.831946 | Costo/m2: $24424
+  A2 | U: 1.14648 | Costo/m2: $20466.8
+  A3 | U: 0.888707 | Costo/m2: $23502.8
+  A4 | U: 1.17514 | Costo/m2: $20211.5
+  A5 | U: 0.660501 | Costo/m2: $28168
+  A6 | U: 0.486211 | Costo/m2: $34680.7
+  A7 | U: 0.599672 | Costo/m2: $30010.9
+  A8 | U: 1.43163 | Costo/m2: $18382
+  A9 | U: 0.687595 | Costo/m2: $27452.1
+  A10 | U: 0.719148 | Costo/m2: $26686.4
+  A11 | U: 0.65528 | Costo/m2: $28312.8
+  A12 | U: 0.940055 | Costo/m2: $22765.2
+  A13 | U: 1.46102 | Costo/m2: $18213.4
+  A14 | U: 1.3551 | Costo/m2: $18855.5
+  A15 | U: 1.32824 | Costo/m2: $19034.5
+  A16 | U: 0.515002 | Costo/m2: $33300.9
+  A17 | U: 0.324525 | Costo/m2: $46977.2
+  A18 | U: 0.763317 | Costo/m2: $25720.9
+  A19 | U: 1.06821 | Costo/m2: $21233.7
+  A20 | U: 0.813712 | Costo/m2: $24747.2
+  A21 | U: 0.739946 | Costo/m2: $26217.4
+  A22 | U: 0.55145 | Costo/m2: $31760.8
+  A23 | U: 0.957226 | Costo/m2: $22536.2
+  A24 | U: 0.626304 | Costo/m2: $29160
+  A25 | U: 0.993319 | Costo/m2: $22080.7
+  A26 | U: 1.2913 | Costo/m2: $19293
+  A27 | U: 1.29712 | Costo/m2: $19251.3
+  A28 | U: 1.2376 | Costo/m2: $19696.2
+  A29 | U: 0.396321 | Costo/m2: $40278.5
+  A30 | U: 1.04381 | Costo/m2: $21496.3
+  A31 | U: 0.848978 | Costo/m2: $24134.6
+  A32 | U: 0.703731 | Costo/m2: $27052
+  A33 | U: 0.52933 | Costo/m2: $32670.2
+  A34 | U: 1.23398 | Costo/m2: $19724.6
+  A35 | U: 1.42127 | Costo/m2: $18443.2
+  A36 | U: 0.444746 | Costo/m2: $36981.7
+  A37 | U: 0.952786 | Costo/m2: $22594.6
+  A38 | U: 1.29711 | Costo/m2: $19251.4
+  A39 | U: 0.987472 | Costo/m2: $22152.2
+
+------------------------------
+Categoria: Piso
+Cantidad de alternativas: 35
+  A1 | U: 0.480735 | Costo/m2: $31881.6
+  A2 | U: 0.679804 | Costo/m2: $25181.1
+  A3 | U: 1.04888 | Costo/m2: $19487.4
+  A4 | U: 1.29619 | Costo/m2: $17486.4
+  A5 | U: 0.676563 | Costo/m2: $25258.6
+  A6 | U: 0.958806 | Costo/m2: $20472.6
+  A7 | U: 1.36335 | Costo/m2: $17068.3
+  A8 | U: 0.633785 | Costo/m2: $26356
+  A9 | U: 0.476393 | Costo/m2: $32090.2
+  A10 | U: 0.609966 | Costo/m2: $27033.8
+  A11 | U: 1.28021 | Costo/m2: $17592.3
+  A12 | U: 0.720155 | Costo/m2: $24274.5
+  A13 | U: 0.345787 | Costo/m2: $40811.5
+  A14 | U: 0.453649 | Costo/m2: $33247.8
+  A15 | U: 0.820374 | Costo/m2: $22408.5
+  A16 | U: 0.813184 | Costo/m2: $22527.1
+  A17 | U: 0.860318 | Costo/m2: $21786
+  A18 | U: 0.640004 | Costo/m2: $26187.4
+  A19 | U: 1.13996 | Costo/m2: $18649.5
+  A20 | U: 1.08628 | Costo/m2: $19126.3
+  A21 | U: 1.34236 | Costo/m2: $17194.6
+  A22 | U: 0.957409 | Costo/m2: $20489.3
+  A23 | U: 0.470191 | Costo/m2: $32394.8
+  A24 | U: 0.827269 | Costo/m2: $22296.8
+  A25 | U: 1.19449 | Costo/m2: $18209
+  A26 | U: 1.01979 | Costo/m2: $19786.6
+  A27 | U: 1.19042 | Costo/m2: $18240.5
+  A28 | U: 0.739389 | Costo/m2: $23877.1
+  A29 | U: 0.531862 | Costo/m2: $29682
+  A30 | U: 0.365022 | Costo/m2: $39135.1
+  A31 | U: 1.34139 | Costo/m2: $17200.4
+  A32 | U: 1.25726 | Costo/m2: $17749.2
+  A33 | U: 1.25627 | Costo/m2: $17756.1
+  A34 | U: 1.02531 | Costo/m2: $19728.5
+  A35 | U: 0.602607 | Costo/m2: $27254
+
+------------------------------
+Categoria: Puerta
+Cantidad de alternativas: 33
+  A1 | U: 1.22183 | Costo/m2: $62737.7
+  A2 | U: 2.07472 | Costo/m2: $49279.7
+  A3 | U: 2.00903 | Costo/m2: $49910.1
+  A4 | U: 1.98977 | Costo/m2: $50102.8
+  A5 | U: 2.89048 | Costo/m2: $43838.5
+  A6 | U: 1.66165 | Costo/m2: $54072.5
+  A7 | U: 1.04784 | Costo/m2: $68173.9
+  A8 | U: 2.38612 | Costo/m2: $46763.6
+  A9 | U: 2.35856 | Costo/m2: $46959.5
+  A10 | U: 1.33884 | Costo/m2: $59876.6
+  A11 | U: 2.14503 | Costo/m2: $48647.8
+  A12 | U: 2.84487 | Costo/m2: $44060.4
+  A13 | U: 3.07521 | Costo/m2: $43007.2
+  A14 | U: 2.32769 | Costo/m2: $47184.4
+  A15 | U: 3.06226 | Costo/m2: $43062.3
+  A16 | U: 1.21516 | Costo/m2: $62917.6
+  A17 | U: 2.32173 | Costo/m2: $47228.5
+  A18 | U: 1.94658 | Costo/m2: $50548.8
+  A19 | U: 3.02392 | Costo/m2: $43227.8
+  A20 | U: 3.05977 | Costo/m2: $43072.9
+  A21 | U: 1.19649 | Costo/m2: $63431.2
+  A22 | U: 2.29023 | Costo/m2: $47465.5
+  A23 | U: 2.26486 | Costo/m2: $47661.1
+  A24 | U: 2.92361 | Costo/m2: $43681.7
+  A25 | U: 1.07082 | Costo/m2: $67354.7
+  A26 | U: 1.80233 | Costo/m2: $52193.5
+  A27 | U: 2.8578 | Costo/m2: $43996.8
+  A28 | U: 1.18275 | Costo/m2: $63819.6
+  A29 | U: 1.53453 | Costo/m2: $56066.6
+  A30 | U: 2.1314 | Costo/m2: $48767
+  A31 | U: 2.91026 | Costo/m2: $43744.5
+  A32 | U: 2.59019 | Costo/m2: $45442.9
+  A33 | U: 2.82989 | Costo/m2: $44134.8
+
+------------------------------
+Categoria: Techo
+Cantidad de alternativas: 30
+  A1 | U: 0.564309 | Costo/m2: $29720.8
+  A2 | U: 0.836945 | Costo/m2: $23948.2
+  A3 | U: 1.06021 | Costo/m2: $21432.1
+  A4 | U: 1.03413 | Costo/m2: $21670
+  A5 | U: 0.414996 | Costo/m2: $36096.6
+  A6 | U: 0.388116 | Costo/m2: $37765.5
+  A7 | U: 1.0614 | Costo/m2: $21421.5
+  A8 | U: 0.482196 | Costo/m2: $32738.4
+  A9 | U: 0.370399 | Costo/m2: $38997.9
+  A10 | U: 0.879061 | Costo/m2: $23375.8
+  A11 | U: 0.459654 | Costo/m2: $33755.5
+  A12 | U: 0.288849 | Costo/m2: $46620.2
+  A13 | U: 0.92977 | Costo/m2: $22755.4
+  A14 | U: 0.762963 | Costo/m2: $25106.8
+  A15 | U: 0.596716 | Costo/m2: $28758.4
+  A16 | U: 0.366049 | Costo/m2: $39318.7
+  A17 | U: 1.19985 | Costo/m2: $20334.4
+  A18 | U: 0.744613 | Costo/m2: $25429.8
+  A19 | U: 1.0507 | Costo/m2: $21517.4
+  A20 | U: 0.597751 | Costo/m2: $28729.4
+  A21 | U: 0.753687 | Costo/m2: $25268.1
+  A22 | U: 0.426226 | Costo/m2: $35461.7
+  A23 | U: 0.976712 | Costo/m2: $22238.4
+  A24 | U: 0.886426 | Costo/m2: $23281.3
+  A25 | U: 0.845891 | Costo/m2: $23821.9
+  A26 | U: 1.02835 | Costo/m2: $21724.3
+  A27 | U: 0.707038 | Costo/m2: $26143.5
+  A28 | U: 0.939407 | Costo/m2: $22645
+  A29 | U: 0.793692 | Costo/m2: $24599.3
+  A30 | U: 0.215519 | Costo/m2: $58399.5
+
+------------------------------
+Categoria: Ventana
+Cantidad de alternativas: 26
+  A1 | U: 4.1882 | Costo/m2: $66713.6
+  A2 | U: 4.03989 | Costo/m2: $67327.2
+  A3 | U: 2.57027 | Costo/m2: $77234.4
+  A4 | U: 1.39186 | Costo/m2: $100292
+  A5 | U: 2.12277 | Costo/m2: $82975.8
+  A6 | U: 2.16181 | Costo/m2: $82380.2
+  A7 | U: 1.2988 | Costo/m2: $103896
+  A8 | U: 2.60707 | Costo/m2: $76850.1
+  A9 | U: 4.11996 | Costo/m2: $66990.4
+  A10 | U: 3.60651 | Costo/m2: $69409.3
+  A11 | U: 2.61694 | Costo/m2: $76748.8
+  A12 | U: 2.13666 | Costo/m2: $82761.4
+  A13 | U: 2.07844 | Costo/m2: $83679.1
+  A14 | U: 5.33082 | Costo/m2: $63131.2
+  A15 | U: 5.01339 | Costo/m2: $63962.6
+  A16 | U: 5.09091 | Costo/m2: $63750
+  A17 | U: 1.82799 | Costo/m2: $88293.3
+  A18 | U: 2.9966 | Costo/m2: $73359.8
+  A19 | U: 2.3257 | Costo/m2: $80098.4
+  A20 | U: 1.03634 | Costo/m2: $117546
+  A21 | U: 2.39059 | Costo/m2: $79281.5
+  A22 | U: 1.57876 | Costo/m2: $94338.6
+  A23 | U: 5.216 | Costo/m2: $63420.2
+  A24 | U: 4.65893 | Costo/m2: $65024.9
+  A25 | U: 3.91638 | Costo/m2: $67873.7
+  A26 | U: 1.59794 | Costo/m2: $93806.3
+
+==============================
+ELEMENTOS
+==============================
+
+------------------------------
+Nombre: Muro Norte
+Categoria: Muro
+Area: 16.7317 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 39
+
+------------------------------
+Nombre: Muro Sur
+Categoria: Muro
+Area: 16.7317 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 39
+
+------------------------------
+Nombre: Muro Este
+Categoria: Muro
+Area: 20.4165 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 39
+
+------------------------------
+Nombre: Muro Oeste
+Categoria: Muro
+Area: 20.4165 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 39
+
+------------------------------
+Nombre: Techo
+Categoria: Techo
+Area: 82.6245 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Techo
+Cantidad de alternativas: 30
+
+------------------------------
+Nombre: Piso
+Categoria: Piso
+Area: 82.6245 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Piso
+Cantidad de alternativas: 35
+
+------------------------------
+Nombre: Ventana 1
+Categoria: Ventana
+Area: 4.38159 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Ventana
+Cantidad de alternativas: 26
+
+------------------------------
+Nombre: Ventana 2
+Categoria: Ventana
+Area: 4.38159 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Ventana
+Cantidad de alternativas: 26
+
+------------------------------
+Nombre: Ventana 3
+Categoria: Ventana
+Area: 4.38159 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Ventana
+Cantidad de alternativas: 26
+
+------------------------------
+Nombre: Ventana 4
+Categoria: Ventana
+Area: 4.38159 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Ventana
+Cantidad de alternativas: 26
+
+------------------------------
+Nombre: Puerta 1
+Categoria: Puerta
+Area: 2.42129 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Puerta
+Cantidad de alternativas: 33
+
+==============================
+RESUMEN
+==============================
+Categorias: 5
+Catalogos generados: 5
+Elementos totales: 11
+Elementos fijos: 0
+Elementos optimizables: 11
+Umax: 0.446585
+Superficie: 82.6245 m2

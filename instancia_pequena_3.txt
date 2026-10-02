@@ -1,0 +1,131 @@
+==============================
+DATOS DE LA INSTANCIA
+==============================
+Tipo: pequena
+Semilla: 103
+
+DIMENSIONES
+Largo: 9.81366 m
+Ancho: 10.8568 m
+Altura: 2.32695 m
+Superficie: 106.545 m2
+Volumen: 247.925 m3
+Umax: 0.852217
+Cantidad total de elementos: 8
+
+==============================
+CATALOGOS POR CATEGORIA
+==============================
+
+------------------------------
+Categoria: Muro
+Cantidad de alternativas: 10
+  A1 | U: 1.11305 | Costo/m2: $20781.2
+  A2 | U: 1.03077 | Costo/m2: $21641.8
+  A3 | U: 1.10684 | Costo/m2: $20841.7
+  A4 | U: 0.309579 | Costo/m2: $48762.3
+  A5 | U: 0.703872 | Costo/m2: $27048.6
+  A6 | U: 0.728727 | Costo/m2: $26467.1
+  A7 | U: 0.883272 | Costo/m2: $23585.8
+  A8 | U: 1.35394 | Costo/m2: $18863
+  A9 | U: 1.20589 | Costo/m2: $19951.2
+  A10 | U: 1.05656 | Costo/m2: $21357.6
+
+------------------------------
+Categoria: Piso
+Cantidad de alternativas: 7
+  A1 | U: 1.35398 | Costo/m2: $17124.2
+  A2 | U: 0.703719 | Costo/m2: $24631.2
+  A3 | U: 1.16733 | Costo/m2: $18423.2
+  A4 | U: 0.60787 | Costo/m2: $27096
+  A5 | U: 0.465845 | Costo/m2: $32613
+  A6 | U: 0.345431 | Costo/m2: $40844.3
+  A7 | U: 0.534125 | Costo/m2: $29594.4
+
+------------------------------
+Categoria: Puerta
+Cantidad de alternativas: 5
+  A1 | U: 1.97049 | Costo/m2: $50299.6
+  A2 | U: 1.1494 | Costo/m2: $64800.7
+  A3 | U: 2.45989 | Costo/m2: $46260.9
+  A4 | U: 1.41681 | Costo/m2: $58232.4
+  A5 | U: 1.87024 | Costo/m2: $51387.6
+
+==============================
+ELEMENTOS
+==============================
+
+------------------------------
+Nombre: Muro Norte
+Categoria: Muro
+Area: 24.0308 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Muro
+Cantidad de alternativas: 10
+
+------------------------------
+Nombre: Muro Sur
+Categoria: Muro
+Area: 24.0308 m2
+Tipo: FIJO
+U fijo: 0.806279
+Costo fijo/m2: $24883.2
+
+------------------------------
+Nombre: Muro Este
+Categoria: Muro
+Area: 21.7218 m2
+Tipo: FIJO
+U fijo: 0.599369
+Costo fijo/m2: $30021.1
+
+------------------------------
+Nombre: Muro Oeste
+Categoria: Muro
+Area: 21.7218 m2
+Tipo: FIJO
+U fijo: 1.22394
+Costo fijo/m2: $19804.4
+
+------------------------------
+Nombre: Techo
+Categoria: Techo
+Area: 106.545 m2
+Tipo: FIJO
+U fijo: 0.75131
+Costo fijo/m2: $25310.1
+
+------------------------------
+Nombre: Piso
+Categoria: Piso
+Area: 106.545 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Piso
+Cantidad de alternativas: 7
+
+------------------------------
+Nombre: Puerta 1
+Categoria: Puerta
+Area: 2.73232 m2
+Tipo: OPTIMIZABLE
+Catalogo utilizado: Puerta
+Cantidad de alternativas: 5
+
+------------------------------
+Nombre: Puerta 2
+Categoria: Puerta
+Area: 1.96068 m2
+Tipo: FIJO
+U fijo: 1.06573
+Costo fijo/m2: $67533
+
+==============================
+RESUMEN
+==============================
+Categorias: 4
+Catalogos generados: 3
+Elementos totales: 8
+Elementos fijos: 5
+Elementos optimizables: 3
+Umax: 0.852217
+Superficie: 106.545 m2
