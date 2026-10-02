@@ -5,15 +5,9 @@
 
 using namespace std;
 
+// Guardar instancia en archivo
 
-// ============================================================
-// GUARDAR INSTANCIA EN ARCHIVO
-// ============================================================
-
-void guardarInstancia(
-    const Instancia& casa,
-    int numeroInstancia
-) {
+void guardarInstancia(const Instancia& casa,int numeroInstancia) {
 
     string nombreArchivo =
         "instancia_"
@@ -142,10 +136,6 @@ void guardarInstancia(
 }
 
 
-// ============================================================
-// MAIN
-// ============================================================
-
 int main() {
 
     vector<string> tipos = {
@@ -155,10 +145,8 @@ int main() {
     };
 
     int semilla = 101;
-
     int totalValidas = 0;
     int totalDescartadas = 0;
-
 
     for (const string& tipo : tipos) {
 
