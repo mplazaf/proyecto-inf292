@@ -305,65 +305,146 @@ void asignarFijosYOptimizables(Instancia& instancia,mt19937& gen) {
     }
 }
 
+void asignarAreas(
+    Instancia& instancia,
+    mt19937& gen
+) {
 
-void asignarAreas(Instancia& instancia,mt19937& gen) {
-    // Áreas base de los muros
-    double areaMuroNorteSur = instancia.ancho * instancia.altura;
-    double areaMuroEsteOeste =instancia.largo * instancia.altura;
+    // AREAS BRUTAS DE LOS MUROS
+    double areaMuroNorteSur =
+        instancia.ancho * instancia.altura;
 
-    // Para repartir ventanas entre muros
-    uniform_real_distribution<double> distPorcentajeVentanas(0.10,0.25);
-
-    double porcentajeVentanas = distPorcentajeVentanas(gen);
-
-    double areaMurosTotal = 2.0 * areaMuroNorteSur + 2.0 * areaMuroEsteOeste;
-
-    double areaVentanasTotal = areaMurosTotal * porcentajeVentanas;
+    double areaMuroEsteOeste =
+        instancia.largo * instancia.altura;
 
     int cantidadVentanas = 0;
 
+    double areaMurosTotal = 0.0;
+
     for (const Elemento& elemento : instancia.elementos) {
+
         if (elemento.categoria == "Ventana") {
             cantidadVentanas++;
         }
+
+        else if (elemento.categoria == "Muro") {
+
+            if (
+                elemento.nombre == "Muro Norte" ||
+                elemento.nombre == "Muro Sur"
+            ) {
+                areaMurosTotal += areaMuroNorteSur;
+            }
+
+            else if (
+                elemento.nombre == "Muro Este" ||
+                elemento.nombre == "Muro Oeste"
+            ) {
+                areaMurosTotal += areaMuroEsteOeste;
+            }
+        }
     }
-    // Área promedio por ventana
+
+
+    // AREA TOTAL DE VENTANAS
+
+    double areaVentanasTotal = 0.0;
     double areaPorVentana = 0.0;
-    if (cantidadVentanas > 0) {
-        areaPorVentana = areaVentanasTotal / cantidadVentanas;
+
+    if (
+        cantidadVentanas > 0 &&
+        areaMurosTotal > 0.0
+    ) {
+
+        uniform_real_distribution<double>
+            distPorcentajeVentanas(
+                0.10,
+                0.25
+            );
+        double porcentajeVentanas = distPorcentajeVentanas(gen);
+        areaVentanasTotal =areaMurosTotal *porcentajeVentanas;
+
+        areaPorVentana = areaVentanasTotal /cantidadVentanas;
     }
-    // Puertas: rango de área por puerta
-    uniform_real_distribution<double> distAreaPuerta(1.5,3.0);
+
+    // AREAS DE PUERTAS
+    uniform_real_distribution<double>
+        distAreaPuerta(
+            1.5,
+            3.0
+        );
+
+    double areaPuertasTotal = 0.0;
+
+    for (Elemento& elemento : instancia.elementos) {
+
+        if (elemento.categoria == "Puerta") {
+
+            elemento.area =
+                distAreaPuerta(gen);
+
+            areaPuertasTotal +=
+                elemento.area;
+        }
+    }
+
+    // AREA TOTAL DE ABERTURAS
+
+    double areaAberturasTotal =areaVentanasTotal +areaPuertasTotal;
 
     for (Elemento& elemento : instancia.elementos) {
         // PISO
         if (elemento.categoria == "Piso") {
-            elemento.area = instancia.superficie;
-        }
-        // TECHO
-        else if (elemento.categoria == "Techo") {
-            // techo = superficie de planta
-            elemento.area = instancia.superficie;
+
+            elemento.area =
+                instancia.superficie;
         }
 
+        // TECHO
+        else if (elemento.categoria == "Techo") {
+
+            elemento.area =
+                instancia.superficie;
+        }
         // MUROS
         else if (elemento.categoria == "Muro") {
 
-            if (elemento.nombre == "Muro Norte" || elemento.nombre == "Muro Sur") {
-                elemento.area = areaMuroNorteSur;
+            double areaBruta = 0.0;
+
+            if (
+                elemento.nombre == "Muro Norte" ||
+                elemento.nombre == "Muro Sur"
+            ) {
+
+                areaBruta =
+                    areaMuroNorteSur;
             }
-            else if (elemento.nombre == "Muro Este" ||elemento.nombre == "Muro Oeste") {
-                elemento.area = areaMuroEsteOeste;
+
+            else if (
+                elemento.nombre == "Muro Este" ||
+                elemento.nombre == "Muro Oeste"
+            ) {
+
+                areaBruta =
+                    areaMuroEsteOeste;
             }
+
+            double areaAberturasMuro = 0.0;
+
+            if (areaMurosTotal > 0.0) {
+
+                double proporcionMuro = areaBruta /areaMurosTotal;
+                areaAberturasMuro = areaAberturasTotal *proporcionMuro;
+            }
+            elemento.area =areaBruta -areaAberturasMuro;
         }
+
         // VENTANAS
+
         else if (elemento.categoria == "Ventana") {
-            elemento.area = areaPorVentana;
-        }
-        // PUERTAS
-        else if (elemento.categoria == "Puerta") {
+
             elemento.area =
-                distAreaPuerta(gen);
+                areaPorVentana;
         }
     }
 }
