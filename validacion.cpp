@@ -6,10 +6,6 @@ using namespace std;
 
 bool validarInstancia(const Instancia& instancia) {
 
-    // ========================================================
-    // VALIDAR TIPO DE INSTANCIA
-    // ========================================================
-
     if (instancia.tipo != "pequena" &&
         instancia.tipo != "mediana" &&
         instancia.tipo != "grande") {
@@ -17,11 +13,8 @@ bool validarInstancia(const Instancia& instancia) {
         return false;
     }
 
-
-    // ========================================================
-    // VALIDAR DIMENSIONES GENERALES
-    // ========================================================
-
+// Validar dimensiones
+    
     if (instancia.largo <= 0 ||
         instancia.ancho <= 0 ||
         instancia.altura <= 0 ||
@@ -31,12 +24,9 @@ bool validarInstancia(const Instancia& instancia) {
 
         return false;
     }
-
-
-    // ========================================================
-    // VALIDAR CATEGORIAS Y AREAS
-    // ========================================================
-
+    
+    // Validar categorías
+    
     set<string> categorias;
 
     for (const Elemento& elemento : instancia.elementos) {
@@ -72,10 +62,7 @@ bool validarInstancia(const Instancia& instancia) {
         }
     }
 
-
-    // ========================================================
-    // VALIDAR CANTIDAD DE ELEMENTOS OPTIMIZABLES
-    // ========================================================
+    // Validar cantidad de elementos optimizables
 
     int cantidadOptimizables = 0;
 
@@ -116,18 +103,12 @@ bool validarInstancia(const Instancia& instancia) {
         }
     }
 
-
-    // ========================================================
-    // VALIDAR ELEMENTOS
-    // ========================================================
+    // Validar los elementos
 
     for (const Elemento& elemento :
          instancia.elementos) {
 
-
-        // ----------------------------------------------------
-        // ELEMENTO FIJO
-        // ----------------------------------------------------
+        // Elemento fijo
 
         if (elemento.fijo) {
 
@@ -138,16 +119,12 @@ bool validarInstancia(const Instancia& instancia) {
             }
         }
 
-
-        // ----------------------------------------------------
-        // ELEMENTO OPTIMIZABLE
-        // ----------------------------------------------------
+        // Elemento optimizable
 
         else {
 
             int cantidadAlternativas =
                 elemento.alternativas.size();
-
 
             // Cantidad de alternativas segun tipo
 
@@ -178,10 +155,7 @@ bool validarInstancia(const Instancia& instancia) {
                 }
             }
 
-
-            // ------------------------------------------------
-            // VALIDAR POSITIVIDAD DE U Y COSTO
-            // ------------------------------------------------
+            // Validar u > 0 y costo
 
             for (const Alternativa& alternativa :
                  elemento.alternativas) {
@@ -193,12 +167,8 @@ bool validarInstancia(const Instancia& instancia) {
                 }
             }
 
-
-            // ------------------------------------------------
-            // VALIDAR RELACION U - COSTO
-            //
+            // Validar relacion U - costo
             // menor U -> mayor costo
-            // ------------------------------------------------
 
             for (int i = 0;
                  i < (int)elemento.alternativas.size();
@@ -232,10 +202,7 @@ bool validarInstancia(const Instancia& instancia) {
         }
     }
 
-
-    // ========================================================
-    // VALIDAR FACTIBILIDAD TERMICA
-    // ========================================================
+    // Validar factibilidad térmica 
 
     double sumaTermica = 0.0;
     double areaTotal = 0.0;
@@ -304,11 +271,6 @@ bool validarInstancia(const Instancia& instancia) {
 
         return false;
     }
-
-
-    // ========================================================
-    // TODAS LAS VALIDACIONES FUERON SUPERADAS
-    // ========================================================
 
     return true;
 }
