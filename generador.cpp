@@ -24,9 +24,40 @@ void generarDimensiones(Instancia &instancia, mt19937 &gen){
     instancia.volumen = instancia.superficie * instancia.altura;
 }
 
-double generarUmax(mt19937& gen) {
-    uniform_real_distribution<double> dist(0.5, 1.2);
-    return dist(gen);
+double calcularUmin(const Instancia& instancia) {
+    double numerador = 0.0;
+    double areaTotal = 0.0;
+    for (const Elemento& elemento : instancia.elementos) {
+        areaTotal += elemento.area;
+        if (elemento.fijo) {
+            numerador += elemento.area * elemento.Ufijo;
+        }
+        else {
+            if (elemento.alternativas.empty()) {
+                continue;
+            }
+            double menorU = elemento.alternativas[0].U;
+
+            for (const Alternativa& alternativa :
+                 elemento.alternativas) {
+                if (alternativa.U < menorU) {
+                    menorU = alternativa.U;
+                }
+            }
+            numerador += elemento.area * menorU;
+        }
+    }
+    if (areaTotal == 0.0) {
+        return 0.0;
+    }
+    return numerador / areaTotal;
+}
+
+double generarUmax(const Instancia& instancia,mt19937& gen) {
+    double Umin = calcularUmin(instancia);
+    uniform_real_distribution<double> distMargen(0.05,0.30);
+    double margen = distMargen(gen);
+    return Umin + margen;
 }
 
 vector<string> elegirCategorias(const string& tipo,mt19937& gen) {
@@ -153,7 +184,14 @@ void generarElementos(Instancia& instancia,mt19937& gen) {
         {"Puerta", 1, 2}
     };
 
+    vector<string> categoriasSeleccionadas = elegirCategorias(instancia.tipo, gen);
+
     for (const ConfigCategoria& config : configuracion) {
+        if (
+            find(categoriasSeleccionadas.begin(),categoriasSeleccionadas.end(),config.categoria) == categoriasSeleccionadas.end()) {
+            continue;
+        }
+
         int cantidad = generarCantidadElementos(config,gen);
         // MUROS
         if (config.categoria == "Muro") {
@@ -331,7 +369,6 @@ Instancia generarInstancia(const string& tipo,int semilla) {
     );
 
     generarDimensiones(instancia, gen);
-    instancia.Umax = generarUmax(gen);
     generarElementos(instancia, gen);
     asignarAreas(instancia, gen);
     asignarFijosYOptimizables(instancia, gen);
@@ -343,5 +380,6 @@ Instancia generarInstancia(const string& tipo,int semilla) {
             generarElementoOptimizable(elemento,instancia.tipo,gen);
         }
     }
+    instancia.Umax =generarUmax(instancia,gen);
     return instancia;
 }

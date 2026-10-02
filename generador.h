@@ -17,7 +17,9 @@ Instancia generarInstancia(const string& tipo,int semilla);
 
 void generarDimensiones(Instancia& instancia,mt19937& gen);
 
-double generarUmax(mt19937& gen);
+double calcularUmin(const Instancia& instancia);
+
+double generarUmax(const Instancia& instancia,mt19937& gen);
 
 vector<string> elegirCategorias(const string& tipo,mt19937& gen);
 
