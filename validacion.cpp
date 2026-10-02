@@ -1,25 +1,45 @@
 #include <bits/stdc++.h>
-#include "Instancia.h"
+#include "validacion.h"
 
 using namespace std;
 
+
 bool validarInstancia(const Instancia& instancia) {
 
-    // Dimensiones validas
+    // ========================================================
+    // VALIDAR TIPO DE INSTANCIA
+    // ========================================================
+
+    if (instancia.tipo != "pequena" &&
+        instancia.tipo != "mediana" &&
+        instancia.tipo != "grande") {
+
+        return false;
+    }
+
+
+    // ========================================================
+    // VALIDAR DIMENSIONES GENERALES
+    // ========================================================
+
     if (instancia.largo <= 0 ||
         instancia.ancho <= 0 ||
         instancia.altura <= 0 ||
         instancia.superficie <= 0 ||
         instancia.volumen <= 0 ||
         instancia.Umax <= 0) {
+
         return false;
     }
 
-    // Categorias
+
+    // ========================================================
+    // VALIDAR CATEGORIAS Y AREAS
+    // ========================================================
+
     set<string> categorias;
 
-    for (const Elemento& elemento :
-         instancia.elementos) {
+    for (const Elemento& elemento : instancia.elementos) {
 
         categorias.insert(
             elemento.categoria
@@ -33,10 +53,12 @@ bool validarInstancia(const Instancia& instancia) {
     int cantidadCategorias =
         categorias.size();
 
+
     if (instancia.tipo == "pequena") {
 
         if (cantidadCategorias < 3 ||
             cantidadCategorias > 4) {
+
             return false;
         }
     }
@@ -45,103 +67,145 @@ bool validarInstancia(const Instancia& instancia) {
              instancia.tipo == "grande") {
 
         if (cantidadCategorias != 5) {
+
             return false;
         }
     }
 
-    // Cantidad de optimizables
-    int optimizables = 0;
+
+    // ========================================================
+    // VALIDAR CANTIDAD DE ELEMENTOS OPTIMIZABLES
+    // ========================================================
+
+    int cantidadOptimizables = 0;
 
     for (const Elemento& elemento :
          instancia.elementos) {
 
         if (!elemento.fijo) {
-            optimizables++;
+
+            cantidadOptimizables++;
         }
     }
 
+
     if (instancia.tipo == "pequena") {
 
-        if (optimizables < 2 ||
-            optimizables > 4) {
+        if (cantidadOptimizables < 2 ||
+            cantidadOptimizables > 4) {
+
             return false;
         }
     }
 
     else if (instancia.tipo == "mediana") {
 
-        if (optimizables < 5 ||
-            optimizables > 8) {
+        if (cantidadOptimizables < 5 ||
+            cantidadOptimizables > 8) {
+
             return false;
         }
     }
 
     else if (instancia.tipo == "grande") {
 
-        if (optimizables < 9 ||
-            optimizables > 15) {
+        if (cantidadOptimizables < 9 ||
+            cantidadOptimizables > 15) {
+
             return false;
         }
     }
 
-    // Validar elementos
+
+    // ========================================================
+    // VALIDAR ELEMENTOS
+    // ========================================================
+
     for (const Elemento& elemento :
          instancia.elementos) {
+
+
+        // ----------------------------------------------------
+        // ELEMENTO FIJO
+        // ----------------------------------------------------
 
         if (elemento.fijo) {
 
             if (elemento.Ufijo <= 0 ||
                 elemento.costoFijoM2 <= 0) {
+
                 return false;
             }
         }
 
+
+        // ----------------------------------------------------
+        // ELEMENTO OPTIMIZABLE
+        // ----------------------------------------------------
+
         else {
 
-            int cantidadAlt =
+            int cantidadAlternativas =
                 elemento.alternativas.size();
+
+
+            // Cantidad de alternativas segun tipo
 
             if (instancia.tipo == "pequena") {
 
-                if (cantidadAlt < 5 ||
-                    cantidadAlt > 10) {
+                if (cantidadAlternativas < 5 ||
+                    cantidadAlternativas > 10) {
+
                     return false;
                 }
             }
 
             else if (instancia.tipo == "mediana") {
 
-                if (cantidadAlt < 11 ||
-                    cantidadAlt > 25) {
+                if (cantidadAlternativas < 11 ||
+                    cantidadAlternativas > 25) {
+
                     return false;
                 }
             }
 
             else if (instancia.tipo == "grande") {
 
-                if (cantidadAlt < 26 ||
-                    cantidadAlt > 50) {
+                if (cantidadAlternativas < 26 ||
+                    cantidadAlternativas > 50) {
+
                     return false;
                 }
             }
 
-            // Positividad
-            for (const Alternativa& alt :
+
+            // ------------------------------------------------
+            // VALIDAR POSITIVIDAD DE U Y COSTO
+            // ------------------------------------------------
+
+            for (const Alternativa& alternativa :
                  elemento.alternativas) {
 
-                if (alt.U <= 0 ||
-                    alt.costo <= 0) {
+                if (alternativa.U <= 0 ||
+                    alternativa.costoM2 <= 0) {
+
                     return false;
                 }
             }
 
-            // Relacion U-costo
+
+            // ------------------------------------------------
+            // VALIDAR RELACION U - COSTO
+            //
+            // menor U -> mayor costo
+            // ------------------------------------------------
+
             for (int i = 0;
-                 i < elemento.alternativas.size();
+                 i < (int)elemento.alternativas.size();
                  i++) {
 
                 for (int j = i + 1;
-                     j < elemento.alternativas.size();
+                     j < (int)elemento.alternativas.size();
                      j++) {
 
                     const Alternativa& a =
@@ -150,13 +214,17 @@ bool validarInstancia(const Instancia& instancia) {
                     const Alternativa& b =
                         elemento.alternativas[j];
 
+
                     if (a.U < b.U &&
-                        a.costo <= b.costo) {
+                        a.costoM2 <= b.costoM2) {
+
                         return false;
                     }
 
+
                     if (b.U < a.U &&
-                        b.costo <= a.costo) {
+                        b.costoM2 <= a.costoM2) {
+
                         return false;
                     }
                 }
@@ -164,15 +232,23 @@ bool validarInstancia(const Instancia& instancia) {
         }
     }
 
-    // Factibilidad termica
+
+    // ========================================================
+    // VALIDAR FACTIBILIDAD TERMICA
+    // ========================================================
+
     double sumaTermica = 0.0;
     double areaTotal = 0.0;
+
 
     for (const Elemento& elemento :
          instancia.elementos) {
 
-        areaTotal += elemento.area;
+        areaTotal +=
+            elemento.area;
 
+
+        // Elemento fijo
         if (elemento.fijo) {
 
             sumaTermica +=
@@ -180,20 +256,30 @@ bool validarInstancia(const Instancia& instancia) {
                 elemento.Ufijo;
         }
 
+
+        // Elemento optimizable
         else {
+
+            if (elemento.alternativas.empty()) {
+
+                return false;
+            }
+
 
             double menorU =
                 elemento.alternativas[0].U;
 
-            for (const Alternativa& alt :
+
+            for (const Alternativa& alternativa :
                  elemento.alternativas) {
 
                 menorU =
                     min(
                         menorU,
-                        alt.U
+                        alternativa.U
                     );
             }
+
 
             sumaTermica +=
                 elemento.area *
@@ -201,13 +287,28 @@ bool validarInstancia(const Instancia& instancia) {
         }
     }
 
+
+    if (areaTotal <= 0) {
+
+        return false;
+    }
+
+
     double uMinFactible =
-        sumaTermica / areaTotal;
+        sumaTermica /
+        areaTotal;
+
 
     if (uMinFactible >
         instancia.Umax) {
+
         return false;
     }
+
+
+    // ========================================================
+    // TODAS LAS VALIDACIONES FUERON SUPERADAS
+    // ========================================================
 
     return true;
 }
