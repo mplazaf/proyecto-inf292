@@ -14,6 +14,9 @@ set of int: A = 1..maxAlt;
 % Cantidad real de alternativas de cada elemento
 array[E] of int: nAlt;
 
+% Nombre de cada elemento optimizable
+array[E] of string: nombreElemento;
+
 % Area de cada elemento optimizable
 array[E] of float: area;
 
@@ -77,7 +80,20 @@ constraint
     )
     + aporteUFijo <= Umax * areaTotal;
 
+% ==========================================
+% U OBTENIDO
+% ==========================================
 
+var float: Uobtenido =
+    (
+        sum(e in E, a in A where a <= nAlt[e])
+        (
+            area[e] * U[e,a] * x[e,a]
+        )
+        + aporteUFijo
+    )
+    / areaTotal;
+    
 % ==========================================
 % FUNCION OBJETIVO
 % ==========================================
@@ -95,7 +111,26 @@ solve minimize
 % ==========================================
 
 output [
-    "Costo total = ",
+    "==================================\n",
+    "RESULTADO DE OPTIMIZACION\n",
+    "==================================\n\n",
+
+    "Alternativas seleccionadas:\n",
+
+    concat([
+        if fix(x[e,a]) = 1 then
+            nombreElemento[e]
+            ++ " -> A"
+            ++ show(a)
+            ++ "\n"
+        else
+            ""
+        endif
+
+        | e in E, a in A where a <= nAlt[e]
+    ]),
+
+    "\nCosto total = $",
     show(
         sum(e in E, a in A where a <= nAlt[e])
         (
@@ -103,19 +138,12 @@ output [
         )
         + costoFijo
     ),
-    "\n",
-    "Seleccion de alternativas:\n",
-    concat([
-        if fix(x[e,a]) = 1 then
-            "Elemento "
-            ++ show(e)
-            ++ " -> Alternativa "
-            ++ show(a)
-            ++ "\n"
-        else
-            ""
-        endif
-        | e in E, a in A where a <= nAlt[e]
-    ])
 
+    "\nU obtenido = ",
+    show(Uobtenido),
+
+    "\nUmax = ",
+    show(Umax),
+
+    "\n"
 ];

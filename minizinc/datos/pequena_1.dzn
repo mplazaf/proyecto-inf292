@@ -4,6 +4,11 @@ maxAlt = 10;
 
 nAlt = [10, 9];
 
+nombreElemento = [
+    "Piso",
+    "Puerta"
+];
+
 area = [
     139.044,
     2.84042
