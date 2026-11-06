@@ -1,6 +1,4 @@
-% ==========================================
 % MODELO DE OPTIMIZACION - ENTREGA 2
-% ==========================================
 
 % Cantidad de elementos optimizables
 int: nOpt;
@@ -38,10 +36,8 @@ float: aporteUFijo;
 % Costo total de los elementos fijos: suma(Area_e * Costo_e)
 float: costoFijo;
 
-% ==========================================
-% PARAMETROS PARA EXPERIMENTOS DE MARGEN
-% ==========================================
 
+% PARAMETROS PARA EXPERIMENTOS DE MARGEN
 % Margen relativo aplicado a Umax
 % Ejemplo: -0.10 = reducir Umax en 10%
 float: margenU;
@@ -52,17 +48,14 @@ float: margenCosto;
 % Costo optimo obtenido en el escenario base
 float: costoReferencia;
 
-% ==========================================
+
 % VARIABLES DE DECISION
-% ==========================================
 
 % x[e,a] = 1 si para el elemento e se selecciona la alternativa a
 array[E, A] of var 0..1: x;
 
-% ==========================================
-% LIMITES EXPERIMENTALES
-% ==========================================
 
+% LIMITES EXPERIMENTALES
 float: UmaxExperimental =
     Umax * (1.0 + margenU);
 
@@ -79,9 +72,8 @@ var float: costoTotal =
     )
     + costoFijo;
 
-% ==========================================
+
 % RESTRICCION 1: UNA ALTERNATIVA POR ELEMENTO
-% ==========================================
 
 constraint
     forall(e in E)(
@@ -101,10 +93,7 @@ constraint
     );
 
 
-% ==========================================
 % RESTRICCION TERMICA
-% ==========================================
-
 constraint
     sum(e in E, a in A where a <= nAlt[e])
     (
@@ -117,10 +106,8 @@ constraint
 constraint
     costoTotal <= costoMax;
 
-% ==========================================
-% U OBTENIDO
-% ==========================================
 
+% U OBTENIDO
 var float: Uobtenido =
     (
         sum(e in E, a in A where a <= nAlt[e])
@@ -131,20 +118,16 @@ var float: Uobtenido =
     )
     / areaTotal;
     
-% ==========================================
+
 % FUNCION OBJETIVO
-% ==========================================
 
 solve minimize costoTotal;
 
-% ==========================================
+
 % SALIDA
-% ==========================================
 
 output [
-    "==================================\n",
     "RESULTADO DE OPTIMIZACION\n",
-    "==================================\n\n",
 
     "Alternativas seleccionadas:\n",
 
