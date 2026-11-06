@@ -27,9 +27,7 @@ foreach ($filaBase in $base) {
         foreach ($margenCosto in $margenes) {
 
             Write-Host ""
-            Write-Host "=============================================="
             Write-Host "$instancia | U: $margenU | Costo: $margenCosto"
-            Write-Host "=============================================="
             # MiniZinc necesita punto decimal
             $mU = $margenU.ToString(
                 [System.Globalization.CultureInfo]::InvariantCulture
@@ -51,10 +49,7 @@ foreach ($filaBase in $base) {
 
             $texto = $salida -join "`n"
 
-            # ==========================================
-            # ESTADO
-            # ==========================================
-
+            # Estado
             if ($texto -match "UNSATISFIABLE") {
                 $estado = "INFACTIBLE"
             }
@@ -65,10 +60,8 @@ foreach ($filaBase in $base) {
                 $estado = "DESCONOCIDO"
             }
 
-            # ==========================================
-            # COSTO TOTAL
-            # ==========================================
 
+            # COSTO TOTAL
             $matchCosto = [regex]::Match(
                 $texto,
                 'Costo total = \$([0-9\.]+)'
@@ -84,10 +77,8 @@ foreach ($filaBase in $base) {
                 $costo = $null
             }
 
-            # ==========================================
-            # U OBTENIDO
-            # ==========================================
 
+            # U OBTENIDO
             $matchU = [regex]::Match(
                 $texto,
                 'U obtenido = ([0-9\.]+)'
@@ -103,9 +94,8 @@ foreach ($filaBase in $base) {
                 $uObtenido = $null
             }
 
-            # ==========================================
+
             # UMAX EXPERIMENTAL
-            # ==========================================
             $matchUmax = [regex]::Match(
                 $texto,
                 'Umax experimental = ([0-9\.]+)'
@@ -122,10 +112,7 @@ foreach ($filaBase in $base) {
                 $uMaxExperimental = $null
             }
 
-            # ==========================================
             # COSTO MAXIMO
-            # ==========================================
-
             $matchCostoMax = [regex]::Match(
                 $texto,
                 'Costo maximo = \$([0-9\.]+)'
@@ -142,10 +129,7 @@ foreach ($filaBase in $base) {
                     $costoReferencia * (1 + $margenCosto)
             }
 
-            # ==========================================
             # NODOS
-            # ==========================================
-
             $matchesNodes = [regex]::Matches(
                 $texto,
                 'nodes=([0-9]+)'
@@ -160,10 +144,8 @@ foreach ($filaBase in $base) {
                 $nodes = $null
             }
 
-            # ==========================================
-            # SOLVE TIME
-            # ==========================================
 
+            # SOLVE TIME
             $matchesTime = [regex]::Matches(
                 $texto,
                 'solveTime=([0-9\.]+)'
@@ -181,10 +163,7 @@ foreach ($filaBase in $base) {
                 $solveTime = $null
             }
 
-            # ==========================================
             # OBJECTIVE Y BOUND
-            # ==========================================
-
             $matchesObjective = [regex]::Matches(
                 $texto,
                 'objective=([0-9\.]+)'
@@ -220,10 +199,7 @@ foreach ($filaBase in $base) {
                 $objectiveBound = $null
             }
 
-            # ==========================================
             # MIP GAP
-            # ==========================================
-
             if (
                 $null -ne $objective -and
                 $null -ne $objectiveBound -and
@@ -240,10 +216,7 @@ foreach ($filaBase in $base) {
                 $gap = $null
             }
 
-            # ==========================================
-            # GUARDAR RESULTADO
-            # ==========================================
-
+            # Guardar resultado
             $resultados += [PSCustomObject]@{
                 Instancia = $instancia
                 MargenU = $margenU
@@ -271,9 +244,7 @@ $resultados |
     -Encoding UTF8
 
 Write-Host ""
-Write-Host "=============================================="
 Write-Host "EXPERIMENTOS DE MARGEN TERMINADOS"
 Write-Host "Resultados: resultados_margenes.csv"
 Write-Host "Cantidad esperada: 375"
 Write-Host "Cantidad obtenida: $($resultados.Count)"
-Write-Host "=============================================="
