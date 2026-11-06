@@ -205,4 +205,3 @@ Las comparaciones geométricas y de costos utilizan tolerancias numéricas para 
 - La transmitancia térmica promedio ponderada por área es un **indicador simplificado**: no representa por sí sola la demanda energética real de la vivienda.
 - Para reproducir las instancias deben conservarse el código, las semillas y una implementación compatible de la biblioteca estándar de C++.
 - Los tiempos de resolución dependen del equipo y del entorno de ejecución. Los scripts del repositorio permiten repetir los experimentos, pero sus nuevas mediciones no tienen por qué coincidir con las originales.
-- Las carpetas `benchmark_original/` y `verificacion/`, así como `experimentos_comun.ps1`, **no forman parte de esta versión publicada en GitHub**; corresponden al paquete local de trabajo y verificación.
