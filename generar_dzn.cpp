@@ -5,9 +5,8 @@
 
 using namespace std;
 
-// ======================================================
+
 // Guarda una instancia en formato .dzn para MiniZinc
-// ======================================================
 
 void guardarInstanciaDZN(
     const Instancia& casa,
@@ -21,12 +20,12 @@ void guardarInstanciaDZN(
     double costoFijo = 0.0;
     int maxAlt = 0;
 
-    // --------------------------------------------------
-    // Recorrer todos los elementos
-    // --------------------------------------------------
+   
+    // Recorre todos los elementos
 
     for (const Elemento& elemento : casa.elementos) {
         areaTotal += elemento.area;
+        
         // Elementos fijos
         if (elemento.fijo) {
             aporteUFijo += elemento.area * elemento.Ufijo;
@@ -42,10 +41,8 @@ void guardarInstanciaDZN(
         }
     }
 
-    // --------------------------------------------------
-    // Nombre del archivo
-    // --------------------------------------------------
 
+    // Nombre del archivo
     string nombreArchivo = "minizinc/datos/" + casa.tipo + "_" + to_string(numeroInstancia) + ".dzn";
     ofstream archivo(nombreArchivo);
     if (!archivo.is_open()) {
@@ -56,16 +53,15 @@ void guardarInstanciaDZN(
     // Para conservar precision numerica
     archivo << setprecision(15);
 
-    // --------------------------------------------------
     // Datos generales
-    // --------------------------------------------------
+
 
     archivo << "nOpt = " << optimizables.size() << ";\n\n";
     archivo << "maxAlt = " << maxAlt << ";\n\n";
 
-    // --------------------------------------------------
+   
     // Cantidad de alternativas
-    // --------------------------------------------------
+ 
 
     archivo << "nAlt = [";
     for (int i = 0; i < optimizables.size(); i++) {
@@ -75,9 +71,9 @@ void guardarInstanciaDZN(
     }
     archivo << "];\n\n";
 
-    // --------------------------------------------------
+
     // Nombres de los elementos
-    // --------------------------------------------------
+
 
     archivo << "nombreElemento = [";
     for (int i = 0; i < optimizables.size(); i++) {
@@ -87,9 +83,8 @@ void guardarInstanciaDZN(
     }
     archivo << "];\n\n";
 
-    // --------------------------------------------------
+ 
     // Areas
-    // --------------------------------------------------
 
     archivo << "area = [";
     for (int i = 0; i < optimizables.size(); i++) {
@@ -99,9 +94,8 @@ void guardarInstanciaDZN(
     }
     archivo << "];\n\n";
 
-    // --------------------------------------------------
+
     // Matriz U
-    // --------------------------------------------------
 
     archivo << "U = [|\n";
     for (int e = 0; e < optimizables.size(); e++) {
@@ -122,10 +116,8 @@ void guardarInstanciaDZN(
     }
     archivo << "\n|];\n\n";
 
-    // --------------------------------------------------
-    // Matriz de costos
-    // --------------------------------------------------
 
+    // Matriz de costos
     archivo << "costo = [|\n";
     for (int e = 0; e < optimizables.size(); e++) {
         archivo << "    ";
@@ -147,10 +139,7 @@ void guardarInstanciaDZN(
     }
     archivo << "\n|];\n\n";
 
-    // --------------------------------------------------
     // Parametros globales
-    // --------------------------------------------------
-
     archivo << "Umax = " << casa.Umax << ";\n\n";
     archivo << "areaTotal = " << areaTotal << ";\n\n";
     archivo << "aporteUFijo = " << aporteUFijo << ";\n\n";
@@ -159,10 +148,7 @@ void guardarInstanciaDZN(
     cout << "DZN generado: " << nombreArchivo << endl;
 }
 
-// ======================================================
 // MAIN
-// ======================================================
-
 int main() {
     vector<string> tipos = {
         "pequena",
@@ -185,8 +171,7 @@ int main() {
         }
     }
 
-    cout << "\n==============================" << endl;
+    cout << "\n" << endl;
     cout << "15 archivos DZN generados" << endl;
-    cout << "==============================" << endl;
     return 0;
 }
