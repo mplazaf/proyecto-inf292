@@ -1,6 +1,5 @@
-% ==========================================
+
 % MODELO DE OPTIMIZACION - ENTREGA 2
-% ==========================================
 
 % Cantidad de elementos optimizables
 int: nOpt;
@@ -39,17 +38,15 @@ float: aporteUFijo;
 float: costoFijo;
 
 
-% ==========================================
+
 % VARIABLES DE DECISION
-% ==========================================
 
 % x[e,a] = 1 si para el elemento e se selecciona la alternativa a
 array[E, A] of var 0..1: x;
 
 
-% ==========================================
+
 % RESTRICCION 1: UNA ALTERNATIVA POR ELEMENTO
-% ==========================================
 
 constraint
     forall(e in E)(
@@ -69,10 +66,7 @@ constraint
     );
 
 
-% ==========================================
 % RESTRICCION TERMICA
-% ==========================================
-
 constraint
     sum(e in E, a in A where a <= nAlt[e])
     (
@@ -80,10 +74,8 @@ constraint
     )
     + aporteUFijo <= Umax * areaTotal;
 
-% ==========================================
-% U OBTENIDO
-% ==========================================
 
+% U OBTENIDO
 var float: Uobtenido =
     (
         sum(e in E, a in A where a <= nAlt[e])
@@ -93,11 +85,8 @@ var float: Uobtenido =
         + aporteUFijo
     )
     / areaTotal;
-    
-% ==========================================
+ 
 % FUNCION OBJETIVO
-% ==========================================
-
 solve minimize
     sum(e in E, a in A where a <= nAlt[e])
     (
@@ -106,14 +95,11 @@ solve minimize
     + costoFijo;
 
 
-% ==========================================
+
 % SALIDA
-% ==========================================
 
 output [
-    "==================================\n",
     "RESULTADO DE OPTIMIZACION\n",
-    "==================================\n\n",
 
     "Alternativas seleccionadas:\n",
 
