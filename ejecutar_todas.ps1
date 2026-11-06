@@ -9,9 +9,7 @@ $archivos = Get-ChildItem "$carpetaDatos\*.dzn" | Sort-Object Name
 foreach ($archivo in $archivos) {
 
     Write-Host ""
-    Write-Host "======================================"
     Write-Host "Resolviendo $($archivo.Name)"
-    Write-Host "======================================"
 
     $salida = minizinc --solver HiGHS --statistics `
         $modelo `
@@ -19,9 +17,8 @@ foreach ($archivo in $archivos) {
 
     $texto = $salida -join "`n"
 
-    # ----------------------------------
+
     # Costo optimo
-    # ----------------------------------
 
     $matchCosto = [regex]::Match(
         $texto,
@@ -34,9 +31,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
+
     # U obtenido
-    # ----------------------------------
 
     $matchU = [regex]::Match(
         $texto,
@@ -49,9 +45,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
+
     # Umax
-    # ----------------------------------
 
     $matchUmax = [regex]::Match(
         $texto,
@@ -64,10 +59,9 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
-    # Objective
-    # ----------------------------------
 
+    # Objective
+    
     $matchesObjective = [regex]::Matches(
         $texto,
         'objective=([0-9\.]+)'
@@ -81,9 +75,7 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
     # Objective bound
-    # ----------------------------------
 
     $matchesBound = [regex]::Matches(
         $texto,
@@ -98,9 +90,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
+
     # Nodos
-    # ----------------------------------
 
     $matchesNodes = [regex]::Matches(
         $texto,
@@ -115,9 +106,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
+
     # Tiempo solver
-    # ----------------------------------
 
     $matchesTime = [regex]::Matches(
         $texto,
@@ -132,9 +122,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
+
     # Flat time
-    # ----------------------------------
 
     $matchFlat = [regex]::Match(
         $texto,
@@ -147,10 +136,8 @@ foreach ($archivo in $archivos) {
         ""
     }
 
-    # ----------------------------------
     # Leer nOpt y nAlt desde .dzn
-    # ----------------------------------
-
+    
     $contenidoDzn = Get-Content $archivo.FullName -Raw
 
     $matchNOpt = [regex]::Match(
@@ -180,9 +167,8 @@ foreach ($archivo in $archivos) {
 
     $restricciones = $nOpt + 1
 
-    # ----------------------------------
+
     # MIP GAP
-    # ----------------------------------
 
     if (
         $objective -ne "" -and
@@ -200,9 +186,7 @@ foreach ($archivo in $archivos) {
         $gap = ""
     }
 
-    # ----------------------------------
     # Estado
-    # ----------------------------------
 
     if ($texto -match '==========') {
         $estado = "OPTIMO"
@@ -214,9 +198,8 @@ foreach ($archivo in $archivos) {
         $estado = "DESCONOCIDO"
     }
 
-    # ----------------------------------
+
     # Guardar fila
-    # ----------------------------------
 
     $resultados += [PSCustomObject]@{
 
@@ -241,9 +224,7 @@ foreach ($archivo in $archivos) {
     }
 }
 
-# ----------------------------------
 # Exportar CSV
-# ----------------------------------
 
 $resultados |
     Export-Csv `
@@ -252,7 +233,5 @@ $resultados |
     -Encoding UTF8
 
 Write-Host ""
-Write-Host "======================================"
 Write-Host "15 INSTANCIAS TERMINADAS"
 Write-Host "Resultados guardados en resultados.csv"
-Write-Host "======================================"
